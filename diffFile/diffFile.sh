@@ -17,7 +17,7 @@ for dirList in `find ${workSpacePath} -type d -mtime $1 -printf "%d %p\n"| sort`
 do
  if [ -d "${dirList}" ]; then
     echo "[`date +'%Y-%m-%d %H:%M:%S'`] 创建文件夹：${filePath}${dirList:28}" >> ${filePath}".log" 
-    mkdir "${filePath}${dirList:28}"     
+    mkdir -p "${filePath}${dirList:28}"     
  fi
 done
 echo "##############################" >> ${filePath}".log"
