@@ -13,6 +13,4 @@
 
 ##### 需要注意的地方
 - 注意，windows下diffFile.sh的workSpacePath最后结尾需要用\结束
-
-
-
+- windows下使用shell脚本可以使用Git Bash Here，具体使用方式可以自行百度、google
