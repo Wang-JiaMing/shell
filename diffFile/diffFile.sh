@@ -5,7 +5,7 @@
 #      从而根据偏移量查找编译后有改动过对的文件从而检出压缩
 #      达到增量打包的功能
 
-workSpacePath='/home/wjm/workspace/out/gdyc'
+workSpacePath='/home/wjm/workspace/github/wondersperson/'
 filePath="/home/wjm/workspace/out/`date +'%Y%m%d%H%M%S'`"
 
 if [ ! -d "${filePath}" ]; then
@@ -13,18 +13,19 @@ if [ ! -d "${filePath}" ]; then
     echo "[`date +'%Y-%m-%d %H:%M:%S'`] 不存在${filePath}目录，进行创建" > ${filePath}".log"
 fi
 echo "##############################" >> ${filePath}".log"
-for dirList in `find ${workSpacePath} -type d -mtime $1 -printf "%d %p\n"| sort` 
+
+for dirList in `find ${workSpacePath} -type d -mtime $1 -printf "%d %p\n"| sort` 	
 do
  if [ -d "${dirList}" ]; then
-    echo "[`date +'%Y-%m-%d %H:%M:%S'`] 创建文件夹：${filePath}${dirList:28}" >> ${filePath}".log" 
-    mkdir -p "${filePath}${dirList:28}"     
+    echo "[`date +'%Y-%m-%d %H:%M:%S'`] 创建文件夹：${filePath}${dirList:$((${#workSpacePath}-1))}" >> ${filePath}".log" 
+    mkdir -p "${filePath}${dirList:$((${#workSpacePath}-1))}"     
  fi
 done
 echo "##############################" >> ${filePath}".log"
 for fileList in `find ${workSpacePath} -type f -mtime $1 -printf "%p\n"| sort`
 do
-   echo "[`date +'%Y-%m-%d %H:%M:%S'`] 复制${fileList}到${filePath}${fileList:28}" >> ${filePath}".log"
-   cp ${fileList} ${filePath}${fileList:28}
+   echo "[`date +'%Y-%m-%d %H:%M:%S'`] 复制${fileList}到${filePath}${fileList:$((${#workSpacePath}-1))}" >> ${filePath}".log"
+   cp ${fileList} ${filePath}${fileList:$((${#workSpacePath}-1))}
 done
 
 echo "[`date +'%Y-%m-%d %H:%M:%S'`] 进行压缩" >> ${filePath}".log"
